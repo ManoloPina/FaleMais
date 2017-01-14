@@ -8,6 +8,7 @@ const notify = require("gulp-notify");
 const gulpWebpack = require("webpack-stream");
 const webpack = require("webpack");
 const uglify = require("gulp-uglify");
+const plumber = require('gulp-plumber');
 
 gulp.task('default', ["connect", "watch"], () => {
   console.log("Running Deafeult!!!");
@@ -21,16 +22,16 @@ gulp.task("connect", () => {
   });
 });
 
-gulp.task('webpack', function() {
-   gulp.src(["./app/**/*.js"])
+gulp.task('webpack', () => {
+   gulp.src(['./vendor/js/all.js'])
   .pipe(gulpWebpack({
-    externals: "./node_modules",
     module: {
       loaders: [
-        {
-          loader: 'babel-loader'
-        }
+        {loader: 'babel-loader'}
       ]
+    },
+    node: {
+      fs: 'fs-extra'
     },
     plugins: [
       new webpack.optimize.UglifyJsPlugin(),
@@ -47,6 +48,12 @@ gulp.task('webpack', function() {
   .pipe(rename('bundle.js'))
   .pipe(gulp.dest('vendor/js'))
   .pipe(connect.reload());
+});
+
+gulp.task('js', () => {
+  gulp.src(['./app/**/*.js'])
+  .pipe(concat('all.js'))
+  .pipe(gulp.dest('./vendor/js'));
 });
 
 gulp.task('less', () => {
@@ -74,7 +81,7 @@ gulp.task("watch", () => {
     "./app/**/*.less",
     "./app/**/*.html",
     "./app/**/*.tpl"
-  ], ["less", "webpack", "html"]);
+  ], ["less", 'js', "webpack", "html"]);
 });
 
 gulp.task('build', ['less', 'html', 'webpack']);
