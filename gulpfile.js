@@ -57,11 +57,16 @@ gulp.task('js', () => {
 });
 
 gulp.task('less', () => {
-  gulp.src(["./app/views/style/less/*.less"])
+  gulp.src("./app/**/*.less")
   .pipe(less())
   .pipe(concat("all.css"))
   .pipe(cleanCSS())
-  .pipe(gulp.dest("./vendor/css/"));
+  .pipe(gulp.dest("./vendor/css"));
+});
+
+gulp.task('style-images', () => {
+  gulp.src('./app/views/styles/images/**/*')
+  .pipe(gulp.dest('./vendor/css/images'));
 });
 
 gulp.task('html', () => {
@@ -84,4 +89,4 @@ gulp.task("watch", () => {
   ], ["less", 'js', "webpack", "html"]);
 });
 
-gulp.task('build', ['less', 'html', 'webpack']);
+gulp.task('build', ['style-images','less', 'html', 'webpack']);

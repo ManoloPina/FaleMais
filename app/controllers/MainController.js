@@ -8,7 +8,10 @@ class MainController extends React.Component {
 
   render() {
     return (
-      <HeaderController/>
+      <div>
+        <HeaderController/>
+          <CallingController/>
+      </div>
     );
   }
 

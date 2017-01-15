@@ -11,6 +11,7 @@ class HeaderController extends React.Component {
         <div className="container-fluid">
           <div clasName="navbar-header">
             <a clasName="navbar-brand" href="#">
+              <img src="vendor/css/images/logo.png" className="img center-block"/>
             </a>
         </div>
       </div>
