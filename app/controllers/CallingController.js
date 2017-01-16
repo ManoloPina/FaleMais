@@ -1,6 +1,9 @@
 'use strct';
 
 import LinkedStateMixin from 'react-addons-linked-state-mixin';
+import ServiceController from './ServiceController';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 class CallingController extends React.Component {
 
@@ -9,6 +12,20 @@ class CallingController extends React.Component {
     this.state = {};
     this.state.origin;
     this.state.selectedOrigin;
+    this.state.listDetails = [];
+  }
+
+  componentWillMount() {
+    ServiceController.getDetails()
+    .then((details) => {
+      console.log('data', details);
+      this.listDetails = details.data.map((detail) => {
+        return (<li>{detail.ddd} - {detail.city}</li>);
+      });
+    })
+    .then(() => {
+      this.setState({listDetails: this.listDetails});
+    });
   }
 
   componentDidMount() {
@@ -17,7 +34,6 @@ class CallingController extends React.Component {
     this.$selectOrigin.on('click', this.openModal.bind(this, '#modal-origin'));
   }
 
-
   openModal(modalElement) {
     $(modalElement).modal('show');
   }
@@ -25,7 +41,6 @@ class CallingController extends React.Component {
   closeModal(modalElement) {
     $(modalElement).modal('close');
   }
-
 
   render() {
     return (
@@ -95,9 +110,13 @@ class CallingController extends React.Component {
               <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               <h4 className="modal-title" id="myModalLabel">Select an origin</h4>
             </div>
-            <div className="modal-body">
 
+            <div className="modal-body">
+              <ul className="list-unstyled" ref='listDetails'>
+                {this.state.listDetails}
+              </ul>
             </div>
+
             <div className="modal-footer">
               <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
             </div>
@@ -115,4 +134,7 @@ class CallingController extends React.Component {
     return $('.select-origin');
   }
 
+
 }
+
+export default CallingController;

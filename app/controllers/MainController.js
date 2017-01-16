@@ -1,5 +1,9 @@
 'use strict';
 
+import React from 'react';
+import ReactDOM from 'react-dom';
+import HeaderController from './HeaderController';
+import CallingController from './CallingController';
 
 class MainController extends React.Component {
   constructor(props) {
@@ -18,3 +22,5 @@ class MainController extends React.Component {
 }
 
 ReactDOM.render(<MainController/>, $('#main-container')[0]);
+
+export default MainController;

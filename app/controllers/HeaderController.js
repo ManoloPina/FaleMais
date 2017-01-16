@@ -1,5 +1,7 @@
 'use strict';
 
+import React from 'react';
+
 class HeaderController extends React.Component {
   constructor(props) {
     super(props);
@@ -20,3 +22,5 @@ class HeaderController extends React.Component {
   }
 
 }
+
+export default HeaderController;

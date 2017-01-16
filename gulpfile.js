@@ -23,7 +23,7 @@ gulp.task("connect", () => {
 });
 
 gulp.task('webpack', () => {
-   gulp.src(['./vendor/js/all.js'])
+   gulp.src(['./app/**/*.js'])
   .pipe(gulpWebpack({
     module: {
       loaders: [
@@ -47,14 +47,18 @@ gulp.task('webpack', () => {
   })
   .pipe(rename('bundle.js'))
   .pipe(gulp.dest('vendor/js'))
-  .pipe(connect.reload());
+  .pipe(connect.reload())
+  .pipe(notify({
+    title: 'Compiled...',
+    onLast: true
+  }));
 });
 
-gulp.task('js', () => {
-  gulp.src(['./app/**/*.js'])
-  .pipe(concat('all.js'))
-  .pipe(gulp.dest('./vendor/js'));
-});
+// gulp.task('js', () => {
+//   gulp.src(['./app/**/*.js'])
+//   .pipe(concat('all.js'))
+//   .pipe(gulp.dest('./vendor/js'));
+// });
 
 gulp.task('less', () => {
   gulp.src("./app/**/*.less")
@@ -75,8 +79,7 @@ gulp.task('html', () => {
 
   gulp.src('./app/views/main.tpl')
   .pipe(rename('index.html'))
-  .pipe(gulp.dest('./vendor/'))
-  .pipe(notify("Compiled!!!"));
+  .pipe(gulp.dest('./vendor/'));
 });
 
 gulp.task("watch", () => {
@@ -86,7 +89,7 @@ gulp.task("watch", () => {
     "./app/**/*.less",
     "./app/**/*.html",
     "./app/**/*.tpl"
-  ], ["less", 'js', "webpack", "html"]);
+  ], ["less", "webpack", "html"]);
 });
 
 gulp.task('build', ['style-images','less', 'html', 'webpack']);
