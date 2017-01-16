@@ -18,6 +18,7 @@
     <script src="node_modules/react/dist/react.min.js"></script>
     <script src="node_modules/react-dom/dist/react-dom.min.js"></script>
     <script src="node_modules/underscore/underscore-min.js"></script>
+    <script src="node_modules/numeral/numeral.js"></script>
     <script src="vendor/js/bundle.js"></script>
   </body>
 </html>
