@@ -1,9 +1,8 @@
 'use strct';
 
-import LinkedStateMixin from 'react-addons-linked-state-mixin';
 import ServiceController from './ServiceController';
-import React from 'react';
-import ReactDOM from 'react-dom';
+// import React from 'react';
+// import ReactDOM from 'react-dom';
 
 class CallingController extends React.Component {
 

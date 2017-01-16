@@ -1,7 +1,7 @@
 'use strict';
 
-import React from 'react';
-import ReactDOM from 'react-dom';
+// import React from 'react';
+// import ReactDOM from 'react-dom';
 import HeaderController from './HeaderController';
 import CallingController from './CallingController';
 

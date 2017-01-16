@@ -14,6 +14,8 @@
   <body>
     <main id="main-container"></main>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="node_modules/react/dist/react.min.js"></script>
+    <script src="node_modules/react-dom/dist/react-dom.min.js"></script>
     <script src="vendor/js/bundle.js"></script>
   </body>
 </html>
